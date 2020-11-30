@@ -1,3 +1,5 @@
+package it.castelli.fiscalCode;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +15,7 @@ public class FiscalCodeGenerator
 		       getControlCode(person);
 	}
 
-	public static String getLastName(PhysicalPerson person)
+	private static String getLastName(PhysicalPerson person)
 	{
 		// find the first consonants
 		Pattern pattern = Pattern.compile("[^aeiou\\d\\s]");
@@ -48,7 +50,7 @@ public class FiscalCodeGenerator
 		return new String(resultArray);
 	}
 
-	public static String getName(PhysicalPerson person)
+	private static String getName(PhysicalPerson person)
 	{
 		// find the first consonants
 		Pattern pattern = Pattern.compile("[^aeiou\\d\\s]");
@@ -99,21 +101,21 @@ public class FiscalCodeGenerator
 
 	private static String getBirthDay(PhysicalPerson person)
 	{
-		return null;
+		return "";
 	}
 
 	private static String getGender(PhysicalPerson person)
 	{
-		return null;
+		return "";
 	}
 
 	private static String getBirthMunicipality(PhysicalPerson person)
 	{
-		return null;
+		return "";
 	}
 
 	private static String getControlCode(PhysicalPerson person)
 	{
-		return null;
+		return "";
 	}
 }

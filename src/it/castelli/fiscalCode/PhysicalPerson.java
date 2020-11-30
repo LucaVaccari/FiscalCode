@@ -1,3 +1,5 @@
+package it.castelli.fiscalCode;
+
 import java.util.Date;
 
 public class PhysicalPerson

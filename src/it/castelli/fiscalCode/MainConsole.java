@@ -1,3 +1,5 @@
+package it.castelli.fiscalCode;
+
 import java.util.Date;
 
 public class MainConsole
@@ -5,7 +7,7 @@ public class MainConsole
 	public static void main(String[] args)
 	{
 		System.out.println(
-				FiscalCodeGenerator.getName(
+				FiscalCodeGenerator.getFiscalCode(
 						new PhysicalPerson("Nicola",
 						                   "De Rossi",
 						                   new Date(),
