@@ -1,6 +1,7 @@
 package it.castelli.fiscalCode;
 
-import java.util.Date;
+
+import it.castelli.dateSystem.Date;
 
 public class MainConsole
 {
@@ -10,7 +11,7 @@ public class MainConsole
 				FiscalCodeGenerator.getFiscalCode(
 						new PhysicalPerson("Nicola",
 						                   "De Rossi",
-						                   new Date(),
+						                   new Date(10, 1, 2003),
 						                   Gender.FEMALE,
 						                   "Anguria")));
 	}
