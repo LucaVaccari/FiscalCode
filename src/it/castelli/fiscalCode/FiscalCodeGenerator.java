@@ -18,6 +18,7 @@ public class FiscalCodeGenerator
 
 	private static final HashMap<Integer, Character> monthLetterTable = new HashMap<>();
 	private final static HashMap<String, String> italianMunicipalityCodes, foreignMunicipalityCodes;
+	private final static HashMap<Character, Integer> oddAlphanumericCharactersTable, evenAlphanumericCharactersTable;
 	static
 	{
 		// map initialization
@@ -40,15 +41,97 @@ public class FiscalCodeGenerator
 		foreignMunicipalityCodes = CSVParser.arrayListToHashMap(CSVParser.getColumns(FOREIGN_CODE_FILE_PATH,
 		                                                                             FOREIGN_MUNICIPALITY_NAME_INDEX,
 		                                                                             FOREIGN_MUNICIPALITY_CODE_INDEX));
+
+		oddAlphanumericCharactersTable = new HashMap<>();
+		evenAlphanumericCharactersTable = new HashMap<>();
+
+		oddAlphanumericCharactersTable.put('0', 1);
+		oddAlphanumericCharactersTable.put('1', 0);
+		oddAlphanumericCharactersTable.put('2', 5);
+		oddAlphanumericCharactersTable.put('3', 7);
+		oddAlphanumericCharactersTable.put('4', 9);
+		oddAlphanumericCharactersTable.put('5', 13);
+		oddAlphanumericCharactersTable.put('6', 15);
+		oddAlphanumericCharactersTable.put('7', 17);
+		oddAlphanumericCharactersTable.put('8', 19);
+		oddAlphanumericCharactersTable.put('9', 21);
+		oddAlphanumericCharactersTable.put('a', 1);
+		oddAlphanumericCharactersTable.put('b', 0);
+		oddAlphanumericCharactersTable.put('c', 5);
+		oddAlphanumericCharactersTable.put('d', 7);
+		oddAlphanumericCharactersTable.put('e', 9);
+		oddAlphanumericCharactersTable.put('f', 13);
+		oddAlphanumericCharactersTable.put('g', 15);
+		oddAlphanumericCharactersTable.put('h', 17);
+		oddAlphanumericCharactersTable.put('i', 19);
+		oddAlphanumericCharactersTable.put('j', 21);
+		oddAlphanumericCharactersTable.put('k', 2);
+		oddAlphanumericCharactersTable.put('l', 4);
+		oddAlphanumericCharactersTable.put('m', 18);
+		oddAlphanumericCharactersTable.put('n', 20);
+		oddAlphanumericCharactersTable.put('o', 11);
+		oddAlphanumericCharactersTable.put('p', 3);
+		oddAlphanumericCharactersTable.put('q', 6);
+		oddAlphanumericCharactersTable.put('r', 8);
+		oddAlphanumericCharactersTable.put('s', 2);
+		oddAlphanumericCharactersTable.put('t', 14);
+		oddAlphanumericCharactersTable.put('u', 16);
+		oddAlphanumericCharactersTable.put('v', 10);
+		oddAlphanumericCharactersTable.put('w', 22);
+		oddAlphanumericCharactersTable.put('x', 25);
+		oddAlphanumericCharactersTable.put('y', 24);
+		oddAlphanumericCharactersTable.put('z', 23);
+
+		evenAlphanumericCharactersTable.put('0', 0);
+		evenAlphanumericCharactersTable.put('1', 1);
+		evenAlphanumericCharactersTable.put('2', 2);
+		evenAlphanumericCharactersTable.put('3', 3);
+		evenAlphanumericCharactersTable.put('4', 4);
+		evenAlphanumericCharactersTable.put('5', 5);
+		evenAlphanumericCharactersTable.put('6', 6);
+		evenAlphanumericCharactersTable.put('7', 7);
+		evenAlphanumericCharactersTable.put('8', 8);
+		evenAlphanumericCharactersTable.put('9', 9);
+		evenAlphanumericCharactersTable.put('a', 0);
+		evenAlphanumericCharactersTable.put('b', 1);
+		evenAlphanumericCharactersTable.put('c', 2);
+		evenAlphanumericCharactersTable.put('d', 3);
+		evenAlphanumericCharactersTable.put('e', 4);
+		evenAlphanumericCharactersTable.put('f', 5);
+		evenAlphanumericCharactersTable.put('g', 6);
+		evenAlphanumericCharactersTable.put('h', 7);
+		evenAlphanumericCharactersTable.put('i', 8);
+		evenAlphanumericCharactersTable.put('j', 9);
+		evenAlphanumericCharactersTable.put('k', 10);
+		evenAlphanumericCharactersTable.put('l', 11);
+		evenAlphanumericCharactersTable.put('m', 12);
+		evenAlphanumericCharactersTable.put('n', 13);
+		evenAlphanumericCharactersTable.put('o', 14);
+		evenAlphanumericCharactersTable.put('p', 15);
+		evenAlphanumericCharactersTable.put('q', 16);
+		evenAlphanumericCharactersTable.put('r', 17);
+		evenAlphanumericCharactersTable.put('s', 18);
+		evenAlphanumericCharactersTable.put('t', 19);
+		evenAlphanumericCharactersTable.put('u', 20);
+		evenAlphanumericCharactersTable.put('v', 21);
+		evenAlphanumericCharactersTable.put('w', 22);
+		evenAlphanumericCharactersTable.put('x', 23);
+		evenAlphanumericCharactersTable.put('y', 24);
+		evenAlphanumericCharactersTable.put('z', 25);
 	}
 
 	public static String getFiscalCode(PhysicalPerson person)
 	{
+		String partialFiscalCode = getPartialFiscalCode(person).toLowerCase();
+		return partialFiscalCode + getControlCode(partialFiscalCode);
+	}
+
+	private static String getPartialFiscalCode(PhysicalPerson person)
+	{
 		return getLastName(person.getLastName()) +
 		       getName(person.getFirstName()) +
 		       getBirthDay(person.getBirthday(), person.getGender()) +
-		       getBirthMunicipality(person.getBirthMunicipality()) +
-		       getControlCode(person);
+		       getBirthMunicipality(person.getBirthMunicipality());
 	}
 
 	private static String getLastName(String lastName)
@@ -144,12 +227,21 @@ public class FiscalCodeGenerator
 
 	private static String getBirthMunicipality(String municipality)
 	{
-		System.out.println(italianMunicipalityCodes.get(municipality));
-		return "";
+		String municipalityCode = italianMunicipalityCodes.get(municipality);
+		return municipalityCode == null ? foreignMunicipalityCodes.get(municipality) : municipalityCode;
 	}
 
-	private static String getControlCode(PhysicalPerson person)
+	private static String getControlCode(String partialFC)
 	{
-		return "";
+		int sum = 0;
+		for (int i = 0; i < partialFC.length(); i++)
+		{
+			if ((i + 1) % 2 == 0)
+				sum += evenAlphanumericCharactersTable.get(partialFC.charAt(i));
+			else
+				sum += oddAlphanumericCharactersTable.get(partialFC.charAt(i));
+		}
+
+		return String.valueOf((char)(sum % 26 + 'a'));
 	}
 }

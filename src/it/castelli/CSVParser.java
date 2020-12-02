@@ -14,7 +14,6 @@ public class CSVParser
 		{
 			Scanner sc = new Scanner(new FileInputStream(filePath));
 			ArrayList<String[]> returnMatrix = new ArrayList<String[]>();
-			String[] selectedTokens = new String[indexes.length], tokens;
 			String line;
 
 			// skip the first line
@@ -22,16 +21,13 @@ public class CSVParser
 
 			while (sc.hasNext())
 			{
+				String[] selectedTokens = new String[indexes.length];
 				line = sc.nextLine();
-				tokens = line.split(";");
-				System.out.println("Length: " + tokens.length);
-//				for (var token : tokens)
-//					System.out.println(token);
-//				for (int i = 0; i < indexes.length; i++)
-//				{
-//					if (tokens.length < i)
-//						selectedTokens[i] = tokens[indexes[i]];
-//				}
+				String[] tokens = line.split(";");
+				for (int i = 0; i < indexes.length; i++)
+				{
+					selectedTokens[i] = tokens[indexes[i]];
+				}
 
 				returnMatrix.add(selectedTokens);
 			}

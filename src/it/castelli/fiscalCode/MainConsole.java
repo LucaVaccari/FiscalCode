@@ -9,10 +9,10 @@ public class MainConsole
 	{
 		System.out.println(
 				FiscalCodeGenerator.getFiscalCode(
-						new PhysicalPerson("Nicola",
-						                   "De Rossi",
-						                   new Date(10, 1, 2003),
-						                   Gender.FEMALE,
-						                   "Anguria")));
+						new PhysicalPerson("Luca",
+						                   "Vaccari",
+						                   new Date(28, 8, 2003),
+						                   Gender.MALE,
+						                   "Brescia")));
 	}
 }
