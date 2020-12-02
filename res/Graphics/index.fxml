@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+
+<?import javafx.scene.control.ComboBox?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="it.castelli.graphics.FXMLController">
+    <HBox>
+        <VBox>
+            <Label text="Nome e cognome"/>
+            <TextField fx:id="firstName"/>
+            <TextField fx:id="lastName"/>
+        </VBox>
+        <VBox>
+            <Label text="Data di nascita"/>
+            <ComboBox fx:id="dayCombo"/>
+            <ComboBox fx:id="monthCombo"/>
+            <ComboBox fx:id="yearCombo"/>
+        </VBox>
+        <VBox>
+            <Label text="Sesso"/>
+            <ComboBox fx:id="genderCombo"/>
+        </VBox>
+        <VBox>
+            <Label text="Luogo di nascita"/>
+            <TextField fx:id="birthMunicipalityTextField"/>
+        </VBox>
+    </HBox>
+    <Button fx:id="buttonGenerator">GENERA CODICE</Button>
+    <Label fx:id="fiscalCodeLabel"/>
+</VBox>
