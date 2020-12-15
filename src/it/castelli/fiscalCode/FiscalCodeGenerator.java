@@ -4,6 +4,7 @@ import it.castelli.CSVParser;
 import it.castelli.dateSystem.Date;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -120,8 +121,11 @@ public class FiscalCodeGenerator
 		evenAlphanumericCharactersTable.put('z', 25);
 	}
 
+	private static String error = "";
+
 	public static String getFiscalCode(PhysicalPerson person)
 	{
+		error = "";
 		String partialFiscalCode = getPartialFiscalCode(person).toLowerCase();
 		return partialFiscalCode + getControlCode(partialFiscalCode);
 	}
@@ -227,8 +231,15 @@ public class FiscalCodeGenerator
 
 	private static String getBirthMunicipality(String municipality)
 	{
-		String municipalityCode = italianMunicipalityCodes.get(municipality);
-		return municipalityCode == null ? foreignMunicipalityCodes.get(municipality) : municipalityCode;
+		String municipalityCode = italianMunicipalityCodes.get(municipality.toLowerCase());
+		if (municipalityCode == null)
+			municipalityCode = foreignMunicipalityCodes.get(municipality.toLowerCase());
+		if (municipalityCode == null)
+		{
+			error += "Il luogo di nascita non è stato trovato\n";
+			return "susmunicipality";
+		}
+		return municipalityCode;
 	}
 
 	private static String getControlCode(String partialFC)
@@ -243,5 +254,9 @@ public class FiscalCodeGenerator
 		}
 
 		return String.valueOf((char)(sum % 26 + 'a'));
+	}
+	public static String getLastError()
+	{
+		return error;
 	}
 }

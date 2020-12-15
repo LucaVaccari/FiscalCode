@@ -8,28 +8,29 @@
 <?import javafx.scene.control.TextField?>
 
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="it.castelli.graphics.FXMLController">
     <HBox>
         <VBox>
             <Label text="Nome e cognome"/>
-            <TextField fx:id="firstName"/>
-            <TextField fx:id="lastName"/>
+            <TextField fx:id="firstNameTextField"/>
+            <TextField fx:id="lastNameTextField"/>
         </VBox>
         <VBox>
             <Label text="Data di nascita"/>
-            <ComboBox fx:id="dayCombo"/>
-            <ComboBox fx:id="monthCombo"/>
-            <ComboBox fx:id="yearCombo"/>
+            <ChoiceBox fx:id="dayChoiceBox"/>
+            <ChoiceBox fx:id="monthChoiceBox"/>
+            <TextField fx:id="yearTextField"/>
         </VBox>
         <VBox>
             <Label text="Sesso"/>
-            <ComboBox fx:id="genderCombo"/>
+            <ChoiceBox fx:id="genderChoice"/>
         </VBox>
         <VBox>
             <Label text="Luogo di nascita"/>
             <TextField fx:id="birthMunicipalityTextField"/>
         </VBox>
     </HBox>
-    <Button fx:id="buttonGenerator">GENERA CODICE</Button>
+    <Button fx:id="buttonGenerator" onAction="#generateFiscalCode">GENERA CODICE</Button>
     <Label fx:id="fiscalCodeLabel"/>
 </VBox>

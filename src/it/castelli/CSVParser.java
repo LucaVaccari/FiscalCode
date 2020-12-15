@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class CSVParser
@@ -26,7 +27,7 @@ public class CSVParser
 				String[] tokens = line.split(";");
 				for (int i = 0; i < indexes.length; i++)
 				{
-					selectedTokens[i] = tokens[indexes[i]];
+					selectedTokens[i] = tokens[indexes[i]].toLowerCase();
 				}
 
 				returnMatrix.add(selectedTokens);
