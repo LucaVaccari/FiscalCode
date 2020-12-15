@@ -6,31 +6,32 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ChoiceBox?>
+
+<?import java.net.URL?>
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="it.castelli.graphics.FXMLController">
+    <stylesheets> <URL value="@style.css" /></stylesheets>
     <HBox>
-        <VBox>
+        <VBox styleClass="pad">
             <Label text="Nome e cognome"/>
             <TextField fx:id="firstNameTextField"/>
             <TextField fx:id="lastNameTextField"/>
         </VBox>
-        <VBox>
+        <VBox styleClass="pad">
             <Label text="Data di nascita"/>
             <ChoiceBox fx:id="dayChoiceBox"/>
             <ChoiceBox fx:id="monthChoiceBox"/>
             <TextField fx:id="yearTextField"/>
         </VBox>
-        <VBox>
+        <VBox styleClass="pad">
             <Label text="Sesso"/>
             <ChoiceBox fx:id="genderChoice"/>
         </VBox>
-        <VBox>
+        <VBox styleClass="pad">
             <Label text="Luogo di nascita"/>
             <TextField fx:id="birthMunicipalityTextField"/>
         </VBox>
     </HBox>
-    <Button fx:id="buttonGenerator" onAction="#generateFiscalCode">GENERA CODICE</Button>
-    <Label fx:id="fiscalCodeLabel"/>
+    <Button fx:id="buttonGenerator" id="generate" onAction="#generateFiscalCode">GENERA CODICE</Button>
+    <Label fx:id="fiscalCodeLabel" id="output"/>
 </VBox>

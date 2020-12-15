@@ -1,12 +1,10 @@
 package it.castelli.graphics;
 
-import com.sun.jdi.IntegerType;
 import it.castelli.dateSystem.Date;
 import it.castelli.fiscalCode.FiscalCodeGenerator;
 import it.castelli.fiscalCode.Gender;
 import it.castelli.fiscalCode.PhysicalPerson;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,10 +12,10 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.awt.event.InputMethodEvent;
-import java.awt.event.KeyEvent;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.ResourceBundle;
 
 public class FXMLController implements Initializable
 {
@@ -31,7 +29,7 @@ public class FXMLController implements Initializable
 	public ChoiceBox<Integer> dayChoiceBox;
 	public ChoiceBox<String> monthChoiceBox;
 
-	private LinkedHashMap<String, Integer> numberOfDaysPerMonth = new LinkedHashMap<>();
+	private final LinkedHashMap<String, Integer> numberOfDaysPerMonth = new LinkedHashMap<>();
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle)
@@ -103,19 +101,19 @@ public class FXMLController implements Initializable
 		}
 
 		String gender = genderChoice.getValue();
-		if (gender.equals("Altro..."))
-			errorStack += "Guardati nei pantaloni...\n";
-		else if (gender.equals("Maschio"))
-			gender = "MALE";
-		else if (gender.equals("Femmina"))
-			gender = "FEMALE";
+		switch (gender)
+		{
+			case "Altro..." -> errorStack += "Guardati nei pantaloni...\n";
+			case "Maschio" -> gender = "MALE";
+			case "Femmina" -> gender = "FEMALE";
+		}
 
 		String municipalityCode = birthMunicipalityTextField.getText();
 
 
 		if (errorStack.equals(""))
 		{
-			Date birthDay = new Date(day, new ArrayList<String>(numberOfDaysPerMonth.keySet()).indexOf(month) + 1, year);
+			Date birthDay = new Date(day, new ArrayList<>(numberOfDaysPerMonth.keySet()).indexOf(month) + 1, year);
 
 			// 5/10/1582 - 14/10/1582
 			if (birthDay.getDay() >= 5 && birthDay.getDay() <= 14 && birthDay.getMonth() == 10 && birthDay.getYear() == 1582)

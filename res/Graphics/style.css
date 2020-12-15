@@ -1,0 +1,61 @@
+.root {
+    -fx-font-size: 11px;
+    -fx-padding: 10px;
+    -fx-alignment: CENTER;
+    -fx-background: #c7ecee;
+    -fx-fill-width: true;
+}
+
+.label {
+    -fx-text-fill: #30336b;
+    -fx-fill-width: true;
+    -fx-table-layout: FIXED;
+}
+
+.button {
+    -fx-text-fill: #30336b;
+    -fx-background-color: #dff9fb;
+    -fx-fill-width: true;
+}
+.choice-box {
+    -fx-text-fill: #30336b;
+    -fx-background-color: #dff9fb;
+    -fx-min-width: 125;
+    -fx-max-width: 200;
+}
+
+.text-field {
+    -fx-text-fill: #30336b;
+    -fx-background-color: #dff9fb;
+    -fx-fill-width: true;
+    -fx-min-width: 125;
+    -fx-max-width: 200;
+}
+
+.pad {
+    -fx-padding: 10px;
+    -fx-alignment: TOP-CENTER;
+    -fx-fill-width: true;
+    -fx-spacing: 5px;
+    -fx-width: 100%;
+}
+
+#generate {
+    -fx-min-width: 500;
+    -fx-max-width: 800;
+    -fx-min-height: 60;
+    -fx-max-height: 120;
+    -fx-font-size: 20;
+}
+.button:hover {
+    -fx-background-color: #7ed6df;
+}
+#output {
+    -fx-min-width: 500;
+    -fx-max-width: 800;
+    -fx-min-height: 60;
+    -fx-max-height: 120;
+
+    -fx-alignment: CENTER;
+    -fx-font-size: 15;
+}
